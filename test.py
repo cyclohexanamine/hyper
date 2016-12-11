@@ -1,10 +1,11 @@
 import sys, pygame, pygame.gfxdraw, time
 from math import cos, sin, acos, atan2, pi, sinh, cosh, acosh, sqrt, fabs, copysign
 
-scale = 0.02
-npoints = 3
+scale = 0.01
+npoints = 4
 speed = 10
 screen_size = 1000, 700
+fps_cap = 30
 
 
 
@@ -156,6 +157,7 @@ def main():
     schemes = [ (pygame.K_UP, pygame.K_DOWN, pygame.K_RIGHT, pygame.K_LEFT)
               , (pygame.K_w, pygame.K_s, pygame.K_d, pygame.K_a)
               , (pygame.K_i, pygame.K_k, pygame.K_l, pygame.K_j)
+              , (pygame.K_t, pygame.K_g, pygame.K_h, pygame.K_f)
               ]
 
     black = 0, 0, 0
@@ -172,9 +174,13 @@ def main():
 
 
     ## Main loop
-
+    
+    last_frame = time.clock()
     while 1:
-        time.sleep(0.030)
+        ## Timing
+        this_frame = time.clock()
+        time.sleep(max(1./float(fps_cap) - (this_frame - last_frame), 0))
+        last_frame = time.clock()
 
         ## Events & controls
         for event in pygame.event.get():
