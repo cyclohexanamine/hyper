@@ -24,11 +24,11 @@ screen_size = 1000, 700
 ## and c is the result of their sum. The angle C is, geometrically,
 ##   C = pi + a1 - a2
 ## so cos C = - cos(a2-a1). A similar procedure is carried out to find the
-## angle B, where cos B = cos(a3-a1)
+## angle B, where cos B = cos(a3-a1).
 ##
 ## For numerical stability, this bounds cosh c >=1, and -1 <= cos B <= 1.
 ## Additionally, we must recover the sign of B when we take acos(cos B);
-## sgn is worked out geometrically. We also prematurely exit when we
+## sign is worked out geometrically. We also prematurely exit when we
 ## encounter a degenerate case of r1, r2 or r3 being 0.
 def addp(p1, p2):
     (r1,a1), (r2,a2) = p1, p2
@@ -48,7 +48,10 @@ def addp(p1, p2):
 
 ## Subtract two polar vectors hyperbolically (k = 1).
 ## In contrast to the above, we now have sides a and c of the triangle,
-## and are looking for b. The same procedure is otherwise applied.
+## and are looking for b. The side length is calculated in the same
+## way, but the angle we want is different; here
+##   A = a2 - a3
+## so we look for cos A = cos(a3-a2).
 def subp(p1, p2):
     (r1,a1), (r2,a2) = p1, p2
 
